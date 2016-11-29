@@ -11,8 +11,13 @@ router.use('/api/utils', require('./utils'));
 //Controllers (router) END :::::
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/panel', function(req, res, next) {
   res.render('panel');
+});
+
+/* GET login page. */
+router.get('/', function(req, res, next) {
+  res.render('login');
 });
 
 /* GET login page. */

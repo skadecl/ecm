@@ -7,6 +7,10 @@ angular.module('app.controllers')
   $scope.loginRut = '';
   $scope.loginPass = '';
 
+  if ($scope.session.isAuthed()) {
+    location.href = '/panel/'
+  }
+
   $scope.doLogin = function() {
     $scope.invalid = false;
     $scope.error = false;
@@ -14,7 +18,7 @@ angular.module('app.controllers')
     $('.login-btn-text').html('Ingresando...');
     $scope.session.logIn($scope.loginRut, $scope.loginPass).then(function(){
       //SUCCESS
-      location.href = '/';
+      location.href = '/panel/';
     }, function(res) {
       //FAIL
       if (res.status == 401){
