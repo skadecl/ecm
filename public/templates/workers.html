@@ -1,0 +1,26 @@
+
+<div>
+  <h3>Personal</h3>
+  <br>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table datatable="ng" class="row-border hover">
+    <thead>
+    <tr>
+        <th>R.U.T</th>
+        <th>Nombre</th>
+        <th>Cargo</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="worker in workers" class="pointer" ng-click="viewWorker($index)">
+        <td>{{worker.rut}}</td>
+        <td>{{worker.first_name}} {{worker.last_name1}}</td>
+        <td>{{worker.job.position}}</td>
+    </tr>
+    </tbody>
+</table>
+    </div>
+  </div>
+</div>

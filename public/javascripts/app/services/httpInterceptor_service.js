@@ -6,7 +6,7 @@ angular.module('app.services')
       var sessionToken = appAuth.getToken();
 
       if (config.url.indexOf(API) === 0 && sessionToken) {
-        config.headers['session-token'] = sessionToken;
+        config.headers['token'] = sessionToken;
       }
       return config;
     },

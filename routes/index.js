@@ -4,7 +4,8 @@ var express = require('express'),
 //Controllers (router) BEGIN :::::
 router.use('/api',
   require('./sessions'),
-  require('./users')
+  require('./users'),
+  require('./workers')
 );
 router.use('/api/utils', require('./utils'));
 //Controllers (router) END :::::

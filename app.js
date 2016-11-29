@@ -27,6 +27,7 @@ app.use(bodyParser.json({limit: '16mb'}));
 app.use(bodyParser.urlencoded({limit: '16mb', extended: true}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/nodeassets', express.static(__dirname + '/node_modules/'));
 
 app.use('/', routes);
 

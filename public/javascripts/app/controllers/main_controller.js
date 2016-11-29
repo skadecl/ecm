@@ -5,7 +5,6 @@ angular.module('app.controllers')
   $scope.session = appSession;
 
   if ($scope.session.requireLogin()){
-
   }
   else {
     location.href = '/login/'

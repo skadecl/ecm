@@ -1,1 +1,1 @@
-angular.module('app.controllers', ['ngAnimate', 'ngSanitize', 'ui.bootstrap', 'mwl.confirm', 'ui-leaflet']);
+angular.module('app.controllers', ['ngAnimate', 'ngSanitize', 'ui.bootstrap', 'mwl.confirm', 'datatables']);

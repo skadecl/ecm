@@ -1,7 +1,8 @@
 var express = require('express'),
     config  = require('../config'),
     Auth    = require('../lib/auth'),
-    User    = require('../models/user'),
+    Worker    = require('../models/worker'),
+    fs      = require('fs'),
     router  = express.Router();
 
 
@@ -25,5 +26,18 @@ router.get('/checkemail/:email', function(req, res) {
     }
   });
 });
+
+// router.get('/genfakedata', function(req, res) {
+//
+//   var fake_data = JSON.parse(fs.readFileSync('fake-data.json', 'utf8'));
+//
+//   for (var i = 0 ; i < fake_data.length ; i++) {
+//     var worker = new Worker(fake_data[i]);
+//     worker.save();
+//   }
+//
+//   res.status(200).end();
+//
+// });
 
 module.exports = router;
