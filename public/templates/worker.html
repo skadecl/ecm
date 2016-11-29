@@ -1,16 +1,66 @@
+<!-- Alerts Modal-->
+<div class="modal fade" id="worker-alerts">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Información</h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="alert alert-success" ng-repeat="alert in alerts.success">
+          <strong>{{alert.message}}</strong>
+        </div>
+        <div class="alert alert-danger" ng-repeat="alert in alerts.error">
+          <strong>{{alert.message}}</strong>
+        </div>
+        <br>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirm Modal-->
+<div class="modal fade" id="worker-delete-confirm">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Confirmar</h4>
+      </div>
+
+      <div class="modal-body">
+        <h4>¿Seguro que quieres eliminar a este trabajador?</h4>
+        <br>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" ng-click="deleteWorker()" class="btn btn-danger">Eliminar</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div>
   <h3>Peril de {{worker.first_name}}  {{worker.last_name1}}  {{worker.last_name2}}</h3>
   <br />
 
   <div class="row">
 
-    <form ng-submit="crearTrabajador()" role="form" class="form-horizontal form-groups-bordered">
+    <form ng-submit="saveWorker()" role="form" class="form-horizontal form-groups-bordered">
 
     <div class="col-md-12">
 
       <button ng-show="!editable" ng-click="editable = !editable" type="button" class="btn btn-default">Editar Trabajador</button>
-      <button ng-show="editable" ng-click="saveWorker()" type="button" class="btn btn-primary">Guardar Cambios</button>
-      <button type="button" class="btn btn-danger pull-right">Eliminar Trabajador</button>
+      <button ng-show="editable" type="submit" class="btn btn-primary">Guardar Cambios</button>
+      <button type="button" ng-click="confirmDelete()" class="btn btn-danger pull-right">Eliminar Trabajador</button>
 
       <br><br>
 
@@ -325,7 +375,7 @@
 
               <div class="col-sm-3">
                 <div class="input-group">
-                  <input type="text" class="form-control datepicker" data-format="D, dd MM yyyy">
+                  <input required ng-model="worker.birth_date" type="text" class="form-control" placeholder="dd/mm/aaaa">
 
                   <div class="input-group-addon">
                     <a class="pointer"><i class="entypo-calendar"></i></a>

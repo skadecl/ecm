@@ -55,7 +55,7 @@ router.post('/worker/new', Auth.isAuthorized, function(req, res) {
     worker = new Worker(req.body.new_worker)
 
     worker.save(function (err) {
-      if (err) res.status(400).json(err);
+      if (err) res.status(400).json({message: 'Ha ocurrido un error al crear el trabajador! (Ya existe?)'});
 
       else res.status(201).json({message: 'El trabajador se ha creado exitosamente'})
     })
@@ -77,7 +77,7 @@ router.post('/worker/update', Auth.isAuthorized, function(req, res) {
     else {
       //Send the user object back
       if (place){
-        res.status(200).json(place);
+        res.status(200).json({message: 'Los cambios han sido guardados'});
       }
       //If no user was found send a 404 error back.
       else {
