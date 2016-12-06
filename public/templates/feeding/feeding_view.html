@@ -1,0 +1,111 @@
+<!-- Alerts Modal-->
+<div class="modal fade" id="feeding-alerts">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Información</h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="alert alert-success" ng-repeat="alert in alerts.success">
+          <strong><i class="fa fa-check"></i></strong> {{alert.message}}
+        </div>
+        <div class="alert alert-danger" ng-repeat="alert in alerts.error">
+          <strong><i class="fa fa-exclamation-triangle"></i></strong> {{alert.message}}
+        </div>
+        <br>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <h3>Alimentación | {{feeding.name}}</h3>
+  <br />
+
+  <div class="row">
+
+    <form ng-submit="saveFeeding()" role="form" class="form-horizontal form-groups-bordered">
+
+    <div class="col-md-12">
+
+      <button ng-show="!editable && access.fd_edit" ng-click="editable = !editable" type="button" class="btn btn-default btn-icon">Editar Plan<i class="entypo-pencil"></i></button>
+      <button ng-show="editable" type="submit" class="btn btn-primary btn-icon">Guardar Cambios<i class="entypo-floppy"></i></button>
+      <button type="button" ng-show="access.fd_delete" mwl-confirm confirm-button-type="danger" cancel-button-type="default" title="Confirmar" message="Seguro que deseas eliminar el plan?" placement="left" confirm-text="Eliminar" cancel-text="Cancelar" on-confirm="deleteFeeding()" class="btn btn-danger pull-right btn-icon">Eliminar Plan<i class="entypo-trash"></i></button>
+      <br><br>
+
+      <div class="panel panel-primary" data-collapsed="0">
+
+        <div class="panel-heading">
+
+          <div class="panel-options">
+            <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
+          </div>
+        </div>
+
+        <div class="panel-body" >
+
+          <div class="form-groups-bordered">
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Nombre</label>
+
+              <div class="col-sm-5">
+                <input required ng-disabled="!editable" ng-model="feeding.name" type="text" class="form-control" placeholder="Ej: Plan Full">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Descripción</label>
+
+              <div class="col-sm-5">
+                <textarea class="form-control autogrow" ng-disabled="!editable" ng-model="feeding.description" placeholder="Agrega una descripción (opcional)" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 48px;"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Plan</label>
+
+              <div class="col-sm-3">
+									<div class="checkbox">
+										<label>
+											<input ng-disabled="!editable" ng-model="feeding.plan.breakfast" type="checkbox">Desayuno
+										</label>
+									</div>
+
+									<div class="checkbox">
+										<label>
+											<input ng-disabled="!editable" ng-model="feeding.plan.snack" type="checkbox">Snack
+										</label>
+									</div>
+								</div>
+
+                <div class="col-sm-3">
+                    <div class="checkbox">
+                      <label>
+                        <input ng-disabled="!editable" ng-model="feeding.plan.lunch" type="checkbox">Almuerzo
+                      </label>
+                    </div>
+
+                    <div class="checkbox">
+                      <label>
+                        <input ng-disabled="!editable" ng-model="feeding.plan.dinner" type="checkbox">Cena
+                      </label>
+                    </div>
+                  </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </form>
+  </div>
+</div>

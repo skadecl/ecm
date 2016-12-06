@@ -346,11 +346,7 @@
 
               <div class="col-sm-3">
                 <div class="input-group">
-                  <input type="text" class="form-control datepicker" data-format="D, dd MM yyyy">
-
-                  <div class="input-group-addon">
-                    <a class="pointer"><i class="entypo-calendar"></i></a>
-                  </div>
+                  <input type="text" class="form-control">
                 </div>
               </div>
             </div>
@@ -554,6 +550,17 @@
         <div class="panel-body">
 
           <div class="form-groups-bordered">
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Plan de Alimentación</label>
+
+              <div class="col-sm-5">
+                <select required ng-model="new_worker.feeding" class="form-control">
+                  <option value="">Seleccione Plan...</option>
+                  <option ng-repeat="feeding in feedings" value="{{feeding._id}}">{{feeding.name}}</option>
+                </select>
+              </div>
+            </div>
+
             <div class="form-group">
               <label class="col-sm-3 control-label">Talla Chaqueta</label>
 

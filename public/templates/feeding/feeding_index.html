@@ -1,0 +1,59 @@
+
+<!-- Alerts Modal-->
+<div class="modal fade" id="feeding-alerts">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Información</h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="alert alert-success" ng-repeat="alert in alerts.success">
+          <strong><i class="fa fa-check"></i></strong> {{alert.message}}
+        </div>
+        <div class="alert alert-danger" ng-repeat="alert in alerts.error">
+          <strong><i class="fa fa-exclamation-triangle"></i></strong> {{alert.message}}
+        </div>
+        <br>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <h3>Planes de Alimentación</h3>
+  <br>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table datatable="ng" class="row-border hover">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Desayuno</th>
+        <th>Snack</th>
+        <th>Almuerzo</th>
+        <th>Cena</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="feeding in feedings" class="pointer" ng-click="viewFeeding($index)">
+        <td>{{feeding.name}}</td>
+        <td>{{feeding.description}}</td>
+        <td><i class="fa col-md-offset-3" ng-class="{'fa-check': feeding.plan.breakfast, 'fa-close': !feeding.plan.breakfast}"></i></td>
+        <td><i class="fa col-md-offset-3" ng-class="{'fa-check': feeding.plan.snack, 'fa-close': !feeding.plan.snack}"></i></td>
+        <td><i class="fa col-md-offset-3" ng-class="{'fa-check': feeding.plan.lunch, 'fa-close': !feeding.plan.lunch}"></i></td>
+        <td><i class="fa col-md-offset-3" ng-class="{'fa-check': feeding.plan.dinner, 'fa-close': !feeding.plan.dinner}"></i></td>
+    </tr>
+    </tbody>
+</table>
+    </div>
+  </div>
+</div>

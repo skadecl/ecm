@@ -1,0 +1,90 @@
+<!-- Alerts Modal-->
+<div class="modal fade" id="feeding-alerts">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Información</h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="alert alert-success" ng-repeat="alert in alerts.success">
+          <strong><i class="fa fa-check"></i></strong> {{alert.message}}
+        </div>
+        <div class="alert alert-danger" ng-repeat="alert in alerts.error">
+          <strong><i class="fa fa-exclamation-triangle"></i></strong> {{alert.message}}
+        </div>
+        <br>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <h3>Asignación de Alimento para el {{todays_date}}</h3>
+  <br />
+
+  <div class="row">
+    <div class="col-md-12">
+      <div>
+        <h4>Buscar Trabajador:</h4>
+        <autocomplete ng-model="selectedWorker" attr-placeholder="Busca por Nombre o RUT" data="newWorkersInfo" on-select="selectWorker" click-activation="true" on-type="searchWorker"></autocomplete>
+      </div>
+      <br><br>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12" ng-show="isInfoReady">
+      <div class="table-responsive">
+        <table class="table table-row-border">
+          <thead>
+            <tr>
+              <th><span class="col-md-offset-3">Desayuno</span></th>
+              <th><span class="col-md-offset-3">Snack</span></th>
+              <th><span class="col-md-offset-3">Almuerzo</span></th>
+              <th><span class="col-md-offset-3">Cena</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <button ng-click="assignMeal('breakfast')" ng-disabled="!worker.feeding.plan.breakfast || feeding_status.breakfast" type="button" ng-class="{'btn-default': !worker.feeding.plan.breakfast, 'btn-success': worker.feeding.plan.breakfast && !feeding_status.breakfast, 'btn-danger': worker.feeding.plan.breakfast && feeding_status.breakfast}" class="btn btn-lg col-md-offset-2">
+                  <span ng-if="!feeding_status.breakfast && worker.feeding.plan.breakfast">Entregar</span>
+                  <span ng-if="feeding_status.breakfast && worker.feeding.plan.breakfast">Entregado</span>
+                  <span ng-if="!worker.feeding.plan.breakfast">No Aplica</span>
+                </button>
+              </td>
+              <td>
+                <button ng-click="assignMeal('snack')" ng-disabled="!worker.feeding.plan.snack || feeding_status.snack" type="button" ng-class="{'btn-default': !worker.feeding.plan.snack, 'btn-success': worker.feeding.plan.snack && !feeding_status.snack, 'btn-danger': worker.feeding.plan.snack && feeding_status.snack}" class="btn btn-lg col-md-offset-2">
+                  <span ng-if="!feeding_status.snack && worker.feeding.plan.snack">Entregar</span>
+                  <span ng-if="feeding_status.snack && worker.feeding.plan.snack">Entregado</span>
+                  <span ng-if="!worker.feeding.plan.snack">No Aplica</span>
+                </button>
+              </td>
+              <td>
+                <button ng-click="assignMeal('lunch')" ng-disabled="!worker.feeding.plan.lunch || feeding_status.lunch" type="button" ng-class="{'btn-default': !worker.feeding.plan.lunch, 'btn-success': worker.feeding.plan.lunch && !feeding_status.lunch, 'btn-danger': worker.feeding.plan.lunch && feeding_status.lunch}" class="btn btn-lg col-md-offset-2">
+                  <span ng-if="!feeding_status.lunch && worker.feeding.plan.lunch">Entregar</span>
+                  <span ng-if="feeding_status.lunch && worker.feeding.plan.lunch">Entregado</span>
+                  <span ng-if="!worker.feeding.plan.lunch">No Aplica</span>
+                </button>
+              </td>
+              <td>
+                <button ng-click="assignMeal('dinner')" ng-disabled="!worker.feeding.plan.dinner || feeding_status.dinner" type="button" ng-class="{'btn-default': !worker.feeding.plan.dinner, 'btn-success': worker.feeding.plan.dinner && !feeding_status.dinner, 'btn-danger': worker.feeding.plan.dinner && feeding_status.dinner}" class="btn btn-lg col-md-offset-2">
+                  <span ng-if="!feeding_status.dinner && worker.feeding.plan.dinner">Entregar</span>
+                  <span ng-if="feeding_status.dinner && worker.feeding.plan.dinner">Entregado</span>
+                  <span ng-if="!worker.feeding.plan.dinner">No Aplica</span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

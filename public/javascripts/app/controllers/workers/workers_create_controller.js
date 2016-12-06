@@ -12,8 +12,19 @@ angular.module('app.controllers')
     console.log($scope.new_worker);
   }
 
+  var getFeedings = function () {
+    $http.get(API + '/feeding')
+    .then(function(response) {
+      $scope.feedings = response.data;
+    }, function(response){
+      console.log(response);
+    });
+  };
+
 
   if ($scope.session.requireLogin()){
+
+    getFeedings()
 
     $scope.new_worker = {}
 
@@ -30,7 +41,7 @@ angular.module('app.controllers')
       $scope.alerts.success = []
       $scope.alerts.error = []
 
-      $http.post(API + '/worker/new/', {new_worker: $scope.new_worker})
+      $http.post(API + '/workers', {new_worker: $scope.new_worker})
       .then(function(response) {
         $scope.alerts.success.push(response.data);
         $('#worker-alerts').modal('show');

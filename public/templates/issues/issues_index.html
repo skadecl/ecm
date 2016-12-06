@@ -1,0 +1,83 @@
+<!-- New Issue Modal-->
+<div class="modal fade" id="modal-new-issue">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Nuevo Prestamo</h4>
+      </div>
+
+      <div class="modal-body">
+        <autocomplete ng-model="selectedWorker" attr-placeholder="Busca por NOMBRE o RUT/PASAPORTE" data="newWorkersInfo" on-select="selectWorker" click-activation="true" on-type="searchWorker"></autocomplete>
+        <br><br><br>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" ng-disabled="!isSelected" ng-click="createIssue()" class="btn btn-green" data-dismiss="modal">Registrar Prestamo</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Alerts Modal-->
+<div class="modal fade" id="items-alerts">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Información</h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="alert alert-success" ng-repeat="alert in alerts.success">
+          <strong><i class="fa fa-check"></i></strong> {{alert.message}}
+        </div>
+        <div class="alert alert-danger" ng-repeat="alert in alerts.error">
+          <strong><i class="fa fa-exclamation-triangle"></i></strong> {{alert.message}}
+        </div>
+        <br>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <h3>Inventario</h3>
+  <br>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table datatable="ng" class="row-border hover">
+    <thead>
+    <tr>
+        <th>Trabajador</th>
+        <th>Insumo</th>
+        <th>Identificador</th>
+        <th>Tipo</th>
+        <th>Talla</th>
+        <th>Fecha</th>
+        <th>Devolver</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="issue in issues" class="pointer">
+        <td ng-click="viewItem($index)">{{issue.worker.first_name}} {{issue.worker.last_name1}} {{issue.worker.last_name2}}</td>
+        <td ng-click="viewItem($index)">{{issue.item.name}}</td>
+        <td ng-click="viewItem($index)">{{issue.item.inner_id}}</td>
+        <td ng-click="viewItem($index)">{{issue.item.type}}</td>
+        <td ng-click="viewItem($index)">{{issue.item.size}}</td>
+        <td ng-click="viewItem($index)">{{idToDate(issue._id)}}</td>
+        <td><button ng-disabled="item.issue != null || !access.is_delete" type="button" ng-click="newIssue(item._id, $index)" class="btn btn-success"><i class="entypo-clipboard"></i></button></td>
+    </tr>
+    </tbody>
+</table>
+    </div>
+  </div>
+</div>

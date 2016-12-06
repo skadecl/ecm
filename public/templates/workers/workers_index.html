@@ -3,21 +3,29 @@
   <h3>Personal</h3>
   <br>
 
+
+
   <div class="row">
     <div class="col-md-12">
-      <table datatable="ng" class="row-border hover">
+      <table datatable="ng" dt-options="showCase.dtOptions" class="row-border hover">
     <thead>
     <tr>
-        <th>R.U.T</th>
+        <th>R.U.T / PASAPORTE</th>
         <th>Nombre</th>
+        <th>Nacionalidad</th>
+        <th>Área</th>
         <th>Cargo</th>
+        <th>Prestamos</th>
     </tr>
     </thead>
     <tbody>
     <tr ng-repeat="worker in workers" class="pointer" ng-click="viewWorker($index)">
         <td>{{worker.rut}}</td>
         <td>{{worker.first_name}} {{worker.last_name1}}</td>
+        <td>{{worker.country}}</td>
+        <td>{{worker.job.area}}</td>
         <td>{{worker.job.position}}</td>
+        <td>{{worker.issues.length}}</td>
     </tr>
     </tbody>
 </table>

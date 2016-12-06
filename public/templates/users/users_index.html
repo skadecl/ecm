@@ -1,0 +1,57 @@
+
+<!-- Alerts Modal-->
+<div class="modal fade" id="users-alerts">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Información</h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="alert alert-success" ng-repeat="alert in alerts.success">
+          <strong><i class="fa fa-check"></i></strong> {{alert.message}}
+        </div>
+        <div class="alert alert-danger" ng-repeat="alert in alerts.error">
+          <strong><i class="fa fa-exclamation-triangle"></i></strong> {{alert.message}}
+        </div>
+        <br>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <h3>Usuarios</h3>
+  <br>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table datatable="ng" class="row-border hover">
+    <thead>
+    <tr>
+        <th>R.U.T</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Administrador</th>
+        <th>Eliminar</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="user in users" class="pointer">
+        <td ng-click="viewUser($index)">{{user.rut}}</td>
+        <td ng-click="viewUser($index)">{{user.first_name}} {{user.last_name}}</td>
+        <td ng-click="viewUser($index)">{{user.email}}</td>
+        <td ng-click="viewUser($index)"><span ng-if="user.admin">Si</span><span ng-if="!user.admin">No</span></td>
+        <td><button ng-disabled="item.issue != null || !access.hr_delete" type="button" ng-click="newIssue(item._id, $index)" class="btn btn-danger"><i class="entypo-trash"></i></button></td>
+    </tr>
+    </tbody>
+</table>
+    </div>
+  </div>
+</div>

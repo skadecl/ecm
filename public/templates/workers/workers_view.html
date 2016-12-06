@@ -10,10 +10,10 @@
 
       <div class="modal-body">
         <div class="alert alert-success" ng-repeat="alert in alerts.success">
-          <strong>{{alert.message}}</strong>
+          <strong><i class="fa fa-check"></i></strong> {{alert.message}}
         </div>
         <div class="alert alert-danger" ng-repeat="alert in alerts.error">
-          <strong>{{alert.message}}</strong>
+          <strong><i class="fa fa-exclamation-triangle"></i></strong> {{alert.message}}
         </div>
         <br>
       </div>
@@ -25,46 +25,22 @@
   </div>
 </div>
 
-<!-- Delete Confirm Modal-->
-<div class="modal fade" id="worker-delete-confirm">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Confirmar</h4>
-      </div>
-
-      <div class="modal-body">
-        <h4>¿Seguro que quieres eliminar a este trabajador?</h4>
-        <br>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" ng-click="deleteWorker()" class="btn btn-danger">Eliminar</button>
-        <button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div>
-  <h3>Peril de {{worker.first_name}}  {{worker.last_name1}}  {{worker.last_name2}}</h3>
+<div ng-show="worker">
+  <h3>Perfil de {{worker.first_name}}  {{worker.last_name1}}  {{worker.last_name2}}</h3>
   <br />
 
   <div class="row">
 
-    <form ng-submit="saveWorker()" role="form" class="form-horizontal form-groups-bordered">
+    <form ng-submit="saveWorker()" role="form" name="workerEdit" class="form-horizontal form-groups-bordered">
 
     <div class="col-md-12">
 
-      <button ng-show="!editable" ng-click="editable = !editable" type="button" class="btn btn-default">Editar Trabajador</button>
-      <button ng-show="editable" type="submit" class="btn btn-primary">Guardar Cambios</button>
-      <button type="button" ng-click="confirmDelete()" class="btn btn-danger pull-right">Eliminar Trabajador</button>
-
+      <button ng-show="!editable && access.hr_edit" ng-click="editable = !editable" type="button" class="btn btn-default btn-icon">Editar Trabajador<i class="entypo-pencil"></i></button>
+      <button ng-show="editable" type="submit" class="btn btn-primary btn-icon">Guardar Cambios<i class="entypo-floppy"></i></button>
+      <button type="button" ng-show="access.hr_delete" mwl-confirm confirm-button-type="danger" cancel-button-type="default" title="Confirmar" message="Seguro que deseas eliminar al trabajador?" placement="left" confirm-text="Eliminar" cancel-text="Cancelar" on-confirm="deleteWorker()" class="btn btn-danger pull-right btn-icon">Eliminar Trabajador<i class="entypo-trash"></i></button>
       <br><br>
 
-      <div class="panel panel-primary" data-collapsed="0">
+      <div class="panel panel-primary panel-collapse" data-collapsed="0">
 
         <div class="panel-heading">
           <div class="panel-title">
@@ -76,7 +52,7 @@
           </div>
         </div>
 
-        <div class="panel-body" >
+        <div class="panel-body" style="display: none;" >
 
           <div class="form-groups-bordered">
             <div class="form-group">
@@ -393,7 +369,7 @@
 
     <div class="col-md-12">
 
-      <div class="panel panel-primary" data-collapsed="0">
+      <div class="panel panel-primary panel-collapse" data-collapsed="0">
 
         <div class="panel-heading">
           <div class="panel-title">
@@ -405,7 +381,7 @@
           </div>
         </div>
 
-        <div class="panel-body">
+        <div class="panel-body" style="display: none;">
 
           <div class="form-groups-bordered">
             <div class="form-group">
@@ -459,7 +435,7 @@
 
     <div class="col-md-12">
 
-      <div class="panel panel-primary" data-collapsed="0">
+      <div class="panel panel-primary panel-collapse" data-collapsed="0">
 
         <div class="panel-heading">
           <div class="panel-title">
@@ -471,7 +447,7 @@
           </div>
         </div>
 
-        <div class="panel-body">
+        <div class="panel-body" style="display: none;">
 
           <div class="form-groups-bordered">
             <div class="form-group">
@@ -568,7 +544,7 @@
 
     <div class="col-md-12">
 
-      <div class="panel panel-primary" data-collapsed="0">
+      <div class="panel panel-primary panel-collapse" data-collapsed="0">
 
         <div class="panel-heading">
           <div class="panel-title">
@@ -580,9 +556,28 @@
           </div>
         </div>
 
-        <div class="panel-body">
+        <div class="panel-body" style="display: none;">
 
           <div class="form-groups-bordered">
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Alojamiento</label>
+
+              <div class="col-sm-5 pointer" ng-click="viewHousing()">
+                <input disabled ng-model="worker.housing.name" type="text" class="form-control pointer">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Plan de Alimentación</label>
+
+              <div class="col-sm-5">
+                <select required ng-disabled="!editable" ng-model="worker.feeding" class="form-control">
+                  <option value="">Seleccione Plan...</option>
+                  <option ng-repeat="feeding in feedings" value="{{feeding._id}}">{{feeding.name}}</option>
+                </select>
+              </div>
+            </div>
+
             <div class="form-group">
               <label class="col-sm-3 control-label">Talla Chaqueta</label>
 
@@ -665,12 +660,54 @@
         </div>
       </div>
     </div>
+  </form>
 
-    <div class="col-md-12 text-center">
-      <div class="form-group">
-        <button ng-show="editable" type="submit" ng-click="saveWorker()" class="btn btn-primary">Guardar Cambios</button>
+  <div class="col-md-12">
+
+    <div class="panel panel-primary panel-collapse" data-collapsed="0">
+
+      <div class="panel-heading">
+        <div class="panel-title">
+          Prestamos
+        </div>
+
+        <div class="panel-options">
+          <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
+        </div>
+      </div>
+
+      <div class="panel-body" style="display: none;" >
+        <div class="table-responsive">
+          <table class="table table-row-border table-hover">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Identificador</th>
+                <th>Talla</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="issue in worker.issues" class="pointer">
+                <td>{{issue.item.name}}</td>
+                <td>{{issue.item.inner_id}}</td>
+                <td>{{issue.item.size}}</td>
+                <td>{{idToDate(issue._id)}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-  </form>
+  </div>
+
+  </div>
+</div>
+
+<div ng-show="!worker">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>El trabajador que buscas no existe!</h3>
+    </div>
   </div>
 </div>

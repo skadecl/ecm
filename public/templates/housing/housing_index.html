@@ -1,0 +1,32 @@
+
+<div>
+  <h3>Alojamiento</h3>
+  <br>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table datatable="ng" class="row-border hover">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Dirección</th>
+        <th>Género</th>
+        <th>Capacidad</th>
+        <th>Piezas</th>
+        <th>Camas</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="housing in housings" class="pointer" ng-click="viewHousing($index)">
+        <td>{{housing.name}}</td>
+        <td>{{housing.address}}</td>
+        <td>{{housing.genre}}</td>
+        <td>{{housing.capacity - housing.people.length}}/{{housing.capacity}}</td>
+        <td>{{housing.rooms}}</td>
+        <td>{{housing.beds}}</td>
+    </tr>
+    </tbody>
+</table>
+    </div>
+  </div>
+</div>

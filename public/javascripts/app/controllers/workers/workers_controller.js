@@ -15,7 +15,7 @@ angular.module('app.controllers')
   };
 
   $scope.viewWorker = function(worker_index) {
-    location.href = '#/worker/' + $scope.workers[worker_index]._id
+    location.href = '#/workers/' + $scope.workers[worker_index]._id
   }
 
 

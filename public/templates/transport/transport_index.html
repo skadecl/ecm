@@ -1,0 +1,150 @@
+<!-- New Passenger Modal-->
+<div class="modal fade" id="modal-new-passenger">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Nuevo Pasajero</h4>
+      </div>
+
+      <div class="modal-body">
+        <autocomplete ng-model="selectedPassenger" attr-placeholder="Ecribe un nombre..." data="newWorkersInfo" on-select="selectWorker" click-activation="true" on-type="searchWorker"></autocomplete>
+        <br><br>
+
+        <div class="col-md-offset-2">
+          <form ng-submit="addPassenger()" role="form" id="form-new-passenger" class="form-horizontal">
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Dirección</label>
+
+              <div class="col-sm-5">
+                <select required ng-disabled="!gotWorker" ng-model="new_passenger.direction" class="form-control">
+                  <option value="">Seleccione Tipo...</option>
+                  <option>Subida</option>
+                  <option>Bajada</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Origen</label>
+
+              <div class="col-sm-5">
+                <select required ng-disabled="!gotWorker" ng-model="new_passenger.origin" class="form-control">
+                  <option value="">Seleccione Tipo...</option>
+                  <option>Los Heroes</option>
+                  <option>Escuela Militar</option>
+                  <option>Omnium</option>
+                  <option>Tobalaba</option>
+                  <option>Cantagallo</option>
+                  <option>Farellones</option>
+                  <option>Parador</option>
+                  <option>Cruce La Parva</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Destino</label>
+
+              <div class="col-sm-5">
+                <select required ng-disabled="!gotWorker" ng-model="new_passenger.destination" class="form-control">
+                  <option value="">Seleccione Tipo...</option>
+                  <option>Los Heroes</option>
+                  <option>Escuela Militar</option>
+                  <option>Omnium</option>
+                  <option>Tobalaba</option>
+                  <option>Cantagallo</option>
+                  <option>Farellones</option>
+                  <option>Parador</option>
+                  <option>Cruce La Parva</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="text-danger col-md-offset-2" ng-show="formError">
+              <strong><i class="fa fa-exclamation-triangle"></i></strong> Debes completar todos los campos
+            </div>
+
+        </div>
+      </div>
+    </form>
+
+
+      <div class="modal-footer">
+        <button type="button" ng-disabled="!gotWorker" ng-click="checkForm()" class="btn btn-green">Agregar Pasajero</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Alerts Modal-->
+<div class="modal fade" id="transport-alerts">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Información</h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="alert alert-success" ng-repeat="alert in alerts.success">
+          <strong><i class="fa fa-check"></i></strong> {{alert.message}}
+        </div>
+        <div class="alert alert-danger" ng-repeat="alert in alerts.error">
+          <strong><i class="fa fa-exclamation-triangle"></i></strong> {{alert.message}}
+        </div>
+        <br>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <h3>Lista diaria de transporte | {{getddMMyyyy(selectedDate)}}</h3>
+  <br>
+
+  <div class="row">
+    <div class="col-md-3">
+      <p class="input-group">
+        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="selectedDate" is-open="datepicker.opened" datepicker-options="dateOptions" current-text="Hoy" clear-text="-" close-text="Cerrar" />
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="openDatepicker()"><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+      </p>
+    </div>
+    <br><br><br><br><br><br>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <button type="button" ng-show="access.tp_add" ng-click="newPassengerOpen()" ng-disabled="!canAddPassengers()" class="btn btn-green btn-icon">Agregar Pasajero<i class="entypo-user-add"></i></button>
+      <br><br>
+      <table datatable="ng" class="row-border hover">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Tránsito</th>
+        <th>Origen</th>
+        <th>Destino</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="passenger in transport.passengers">
+      <td>{{passenger.worker.first_name}} {{passenger.worker.last_name1}} {{passenger.worker.last_name2}}</td>
+      <td>{{passenger.direction}}</td>
+      <td>{{passenger.origin}}</td>
+      <td>{{passenger.destination}}</td>
+    </tr>
+    </tbody>
+</table>
+    </div>
+  </div>
+</div>

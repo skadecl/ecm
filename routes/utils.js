@@ -27,17 +27,28 @@ router.get('/checkemail/:email', function(req, res) {
   });
 });
 
-// router.get('/genfakedata', function(req, res) {
-//
-//   var fake_data = JSON.parse(fs.readFileSync('fake-data.json', 'utf8'));
-//
-//   for (var i = 0 ; i < fake_data.length ; i++) {
-//     var worker = new Worker(fake_data[i]);
-//     worker.save();
-//   }
-//
-//   res.status(200).end();
-//
-// });
+router.get('/access', Auth.isAuthorized, function(req, res) {
+  var user_id = req.currentUser._id;
+
+  User.findOne({_id: user_id}).exec(function(err, user) {
+    //Error Handling
+    if (err) {
+      res.status(500).json({message: 'Internal Error'});
+    }
+    //If no error
+    else {
+      //Send the user object back
+      if (user){
+        //Remove password from sendable object
+        user.password = null;
+        res.status(200).json(user.access);
+      }
+      //If no user was found send a 404 error back.
+      else {
+        res.status(404).json({message: 'User not found'});
+      }
+    }
+  });
+});
 
 module.exports = router;

@@ -1,0 +1,57 @@
+
+<div>
+  <h3>Registro de alimentación | {{getddMMyyyy(selectedDate)}}</h3>
+  <br>
+
+  <div class="row">
+    <div class="col-md-3">
+      <p class="input-group">
+        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="selectedDate" is-open="datepicker.opened" datepicker-options="dateOptions" current-text="Hoy" clear-text="-" close-text="Cerrar" />
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="openDatepicker()"><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table datatable="ng" class="row-border hover">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Desayuno</th>
+        <th>Snack</th>
+        <th>Almuerzo</th>
+        <th>Desayuno</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="assignment in feeding_day.assignments">
+        <td>{{assignment.worker.first_name}} {{assignment.worker.last_name1}} {{assignment.worker.last_name2}}</td>
+        <td>
+          <span class="text-info" ng-if="assignment.worker.feeding.plan.breakfast && assignment.given.breakfast">Entregado</span>
+          <span class="text-danger" ng-if="assignment.worker.feeding.plan.breakfast && !assignment.given.breakfast">No Entregado</span>
+          <span ng-if="!assignment.worker.feeding.plan.breakfast">No Aplica</span>
+        </td>
+        <td>
+          <span class="text-info" ng-if="assignment.worker.feeding.plan.snack && assignment.given.snack">Entregado</span>
+          <span class="text-danger" ng-if="assignment.worker.feeding.plan.snack && !assignment.given.snack">No Entregado</span>
+          <span ng-if="!assignment.worker.feeding.plan.snack">No Aplica</span>
+        </td>
+        <td>
+          <span class="text-info" ng-if="assignment.worker.feeding.plan.lunch && assignment.given.lunch">Entregado</span>
+          <span class="text-danger" ng-if="assignment.worker.feeding.plan.lunch && !assignment.given.lunch">No Entregado</span>
+          <span ng-if="!assignment.worker.feeding.plan.lunch">No Aplica</span>
+        </td>
+        <td>
+          <span class="text-info" ng-if="assignment.worker.feeding.plan.dinner && assignment.given.dinner">Entregado</span>
+          <span class="text-danger" ng-if="assignment.worker.feeding.plan.dinner && !assignment.given.dinner">No Entregado</span>
+          <span ng-if="!assignment.worker.feeding.plan.dinner">No Aplica</span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+    </div>
+  </div>
+</div>

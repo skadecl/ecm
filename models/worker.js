@@ -36,6 +36,9 @@ var WorkerSchema = new Schema({
   },
   join_date: {type: Date, default: null},
   feeding_schema: {type: String, default: null},
+  housing: {type: String, default: null, ref: 'Housing'},
+  issues: [{type: String, default: null, ref: 'Issue'}],
+  feeding: {type: String, deault: null, ref: 'Feeding'},
   status: {type: Boolean, default: true}
 });
 

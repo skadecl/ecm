@@ -35,7 +35,9 @@ router.post('/sign_in', function(req, res) {
         userData: {
           _id: user._id,
           first_name: user.first_name,
-          last_name: user.last_name
+          last_name: user.last_name,
+          admin: user.admin,
+          access: user.access
         }
       });
 

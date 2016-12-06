@@ -24,9 +24,6 @@ angular.module('app.services')
     // TODO: update models and login
     // TODO: handle errors
 
-    console.log(user_rut)
-    console.log(pass)
-
     return $http.post(API + '/sign_in', {
       rut: user_rut,
       password: pass
@@ -40,7 +37,7 @@ angular.module('app.services')
   };
 
   self.logOut = function() {
-    $location.path('/home');
+    location.href = '/'
     appAuth.removeToken();
     self.data = {};
     self.save();

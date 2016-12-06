@@ -5,7 +5,13 @@ var express = require('express'),
 router.use('/api',
   require('./sessions'),
   require('./users'),
-  require('./workers')
+  require('./workers'),
+  require('./housing'),
+  require('./items'),
+  require('./issues'),
+  require('./feeding'),
+  require('./feeding_days'),
+  require('./transport')
 );
 router.use('/api/utils', require('./utils'));
 //Controllers (router) END :::::

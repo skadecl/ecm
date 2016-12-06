@@ -9,36 +9,46 @@ var express = require('express');
 //* Returns an user identified by $user_id
 //***
 
-router.get('/user/get/:user_id', Auth.isAuthorized, function(req, res) {
+router.get('/users/:user_id', Auth.isAuthorized, function(req, res) {
   var user_id = req.params.user_id;
 
-  //Populate teams with name and captain
-  var pop_options = {
-    path: 'teams',
-    select: 'name tag captain',
-    populate: {
-      path: 'captain',
-      select: 'name'
-    }
-  };
-
-  User.findOne({_id: user_id}).populate(pop_options).exec(function(err, user) {
+  User.findOne({_id: user_id}).exec(function(err, user) {
     //Error Handling
     if (err) {
-      console.log(err);
-      res.status(500).json({message: 'Internal Error'});
+      res.status(500).json({message: 'Error Interno'});
     }
     //If no error
     else {
       //Send the user object back
       if (user){
-        //Remove password from sendable object
-        user.password = null;
+        user.password = null
         res.status(200).json(user);
       }
       //If no user was found send a 404 error back.
       else {
-        res.status(404).json({message: 'User not found'});
+        res.status(404).json({message: 'Usuario no encontrado'});
+      }
+    }
+  });
+});
+
+
+router.get('/users', Auth.isAuthorized, function(req, res) {
+
+  User.find({}).exec(function(err, users) {
+    //Error Handling
+    if (err) {
+      res.status(500).json({message: 'Error Interno'});
+    }
+    //If no error
+    else {
+      //Send the user object back
+      if (users){
+        res.status(200).json(users);
+      }
+      //If no user was found send a 404 error back.
+      else {
+        res.status(404).json({message: 'No se han encontrado datos'});
       }
     }
   });
@@ -64,5 +74,48 @@ router.post('/user/update', Auth.isAuthorized, function(req, res) {
     res.status(200).json({message: 'User updated'});
   }
 });
+
+router.post('/users', Auth.isAuthorized, function(req, res) {
+  var user_id = req.currentUser._id;
+
+  if (req.body.new_user) {
+    user = new User(req.body.new_user)
+
+    user.save(function (err) {
+      if (err) res.status(400).json({message: 'Ha ocurrido un error al crear el usuario! (Ya existe?)'});
+
+      else res.status(201).json({message: 'El usuario se ha creado exitosamente'})
+    })
+
+  } else {
+    res.status(500).json({message: 'Error Interno'})
+  }
+});
+
+
+router.patch('/users/:user_id', Auth.isAuthorized, function(req, res) {
+  var user_id = req.params.user_id;
+  var updated_user = req.body.user;
+  delete updated_user.password
+
+  User.findOneAndUpdate({_id: user_id}, updated_user).exec(function(err, place) {
+    //Error Handling
+    if (err) {
+      res.status(500).json({message: 'Error Interno'});
+    }
+    //If no error
+    else {
+      //Send the user object back
+      if (place){
+        res.status(200).json({message: 'Los cambios han sido guardados'});
+      }
+      //If no user was found send a 404 error back.
+      else {
+        res.status(404).json({message: 'No se han encontrado datos'});
+      }
+    }
+  });
+});
+
 
 module.exports = router;

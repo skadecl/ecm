@@ -1,0 +1,349 @@
+<!-- Alerts Modal-->
+<div class="modal fade" id="users-alerts">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Información</h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="alert alert-success" ng-repeat="alert in alerts.success">
+          <strong><i class="fa fa-check"></i></strong> {{alert.message}}
+        </div>
+        <div class="alert alert-danger" ng-repeat="alert in alerts.error">
+          <strong><i class="fa fa-exclamation-triangle"></i></strong> {{alert.message}}
+        </div>
+        <br>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <h3>Nuevo Usuario</h3>
+  <br />
+
+  <div class="row">
+
+    <form ng-submit="createUser()" role="form" class="form-horizontal form-groups-bordered">
+
+    <div class="col-md-12">
+
+      <div class="panel panel-primary" data-collapsed="0">
+
+        <div class="panel-heading">
+
+          <div class="panel-options">
+            <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
+          </div>
+        </div>
+
+        <div class="panel-body" >
+
+          <div class="form-groups-bordered">
+            <div class="form-group">
+              <label class="col-sm-3 control-label">R.U.T</label>
+
+              <div class="col-sm-5">
+                <input required ng-model="new_user.rut" type="text" class="form-control" placeholder="Ej: Juan Esteban">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Nombres</label>
+
+              <div class="col-sm-5">
+                <input required ng-model="new_user.first_name" type="text" class="form-control" placeholder="Ej: Juan Esteban">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Apellidos</label>
+
+              <div class="col-sm-5">
+                <input required ng-model="new_user.last_name" type="text" class="form-control" placeholder="Ej: Quezada Ponce">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">E-Mail</label>
+
+              <div class="col-sm-5">
+                <input required ng-model="new_user.email" type="email" class="form-control" placeholder="Ej: jquezada@elcolorado.cl">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Contraseña</label>
+
+              <div class="col-sm-5">
+                <input required ng-model="new_user.password" type="text" class="form-control" placeholder="Ingresa una contraseña...">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Administrador</label>
+
+              <div class="col-sm-5">
+                <select required ng-model="new_user.admin" class="form-control">
+                  <option value="">Seleccione...</option>
+                  <option value="1">Si</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-6 control-label">Permisos</label>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Recursos Humanos</label>
+
+              <div class="col-sm-3">
+                  <div class="checkbox">
+                    <label>
+                      <input ng-model="new_user.access.hr_index" type="checkbox">Listar Personal
+                    </label>
+                  </div>
+
+                  <div class="checkbox">
+                    <label>
+                      <input ng-model="new_user.access.hr_add" type="checkbox">Agregar Personal
+                    </label>
+                  </div>
+
+                  <div class="checkbox">
+                    <label>
+                      <input ng-model="new_user.access.hr_view" type="checkbox">Ver Perfiles
+                    </label>
+                  </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="checkbox">
+                      <label>
+                        <input ng-model="new_user.access.hr_edit" type="checkbox">Editar Perfiles
+                      </label>
+                    </div>
+
+                    <div class="checkbox">
+                      <label>
+                        <input ng-model="new_user.access.hr_delete" type="checkbox">Eliminar Periles
+                      </label>
+                    </div>
+                  </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Alojamiento</label>
+
+              <div class="col-sm-3">
+                  <div class="checkbox">
+                    <label>
+                      <input ng-model="new_user.access.hs_index" type="checkbox">Listar Residencias
+                    </label>
+                  </div>
+
+                  <div class="checkbox">
+                    <label>
+                      <input ng-model="new_user.access.hs_add" type="checkbox">Agregar Residencias
+                    </label>
+                  </div>
+
+                  <div class="checkbox">
+                    <label>
+                      <input ng-model="new_user.access.hs_view" type="checkbox">Ver Residencias
+                    </label>
+                  </div>
+
+                  <div class="checkbox">
+                    <label>
+                      <input ng-model="new_user.access.hs_edit" type="checkbox">Editar Residencias
+                    </label>
+                  </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <div class="checkbox">
+                      <label>
+                        <input ng-model="new_user.access.hs_delete" type="checkbox">Eliminar Residencias
+                      </label>
+                    </div>
+
+                    <div class="checkbox">
+                      <label>
+                        <input ng-model="new_user.access.hs_house" type="checkbox">Agregar Residentes
+                      </label>
+                    </div>
+
+                    <div class="checkbox">
+                      <label>
+                        <input ng-model="new_user.access.hs_unhouse" type="checkbox">Eliminar Residentes
+                      </label>
+                    </div>
+                  </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Transporte</label>
+
+              <div class="col-sm-3">
+                  <div class="checkbox">
+                    <label>
+                      <input ng-model="new_user.access.tp_index" type="checkbox">Lista Diaria
+                    </label>
+                  </div>
+
+                  <div class="checkbox">
+                    <label>
+                      <input ng-model="new_user.access.tp_add" type="checkbox">Agregar Pasajeros
+                    </label>
+                  </div>
+                </div>
+
+                <div class="col-sm-3">
+                  <div class="checkbox">
+                    <label>
+                      <input ng-model="new_user.access.tp_delete" type="checkbox">Eliminar Pasajeros
+                    </label>
+                  </div>
+
+                  <div class="checkbox">
+                    <label>
+                      <input ng-model="new_user.access.tp_navigate" type="checkbox">Navegar
+                    </label>
+                  </div>
+                  </div>
+            </div>
+
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Alimentación</label>
+
+              <div class="col-sm-3">
+                <div class="checkbox">
+                  <label>
+                    <input ng-model="new_user.access.fd_add" type="checkbox">Crear Planes
+                  </label>
+                </div>
+
+                  <div class="checkbox">
+                    <label>
+                      <input ng-model="new_user.access.fd_index" type="checkbox">Listar Planes
+                    </label>
+                  </div>
+
+                  <div class="checkbox">
+                    <label>
+                      <input ng-model="new_user.access.fd_view" type="checkbox">Ver Planes
+                    </label>
+                  </div>
+
+                  <div class="checkbox">
+                    <label>
+                      <input ng-model="new_user.access.fd_edit" type="checkbox">Editar Planes
+                    </label>
+                  </div>
+                </div>
+
+                <div class="col-sm-3">
+                  <div class="checkbox">
+                    <label>
+                      <input ng-model="new_user.access.fd_delete" type="checkbox">Eliminar Planes
+                    </label>
+                  </div>
+
+                  <div class="checkbox">
+                    <label>
+                      <input ng-model="new_user.access.fd_assign" type="checkbox">Asignar Alimentos
+                    </label>
+                  </div>
+
+                  <div class="checkbox">
+                    <label>
+                      <input ng-model="new_user.access.fd_history" type="checkbox">Ver Registros
+                    </label>
+                  </div>
+                  </div>
+            </div>
+
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Bodega</label>
+
+              <div class="col-sm-3">
+                <div class="checkbox">
+                  <label>
+                    <input ng-model="new_user.access.st_index" type="checkbox">Listar Inventario
+                  </label>
+                </div>
+
+                  <div class="checkbox">
+                    <label>
+                      <input ng-model="new_user.access.st_add" type="checkbox">Crear Insumo
+                    </label>
+                  </div>
+
+                  <div class="checkbox">
+                    <label>
+                      <input ng-model="new_user.access.st_view" type="checkbox">Ver Insumo
+                    </label>
+                  </div>
+
+                  <div class="checkbox">
+                    <label>
+                      <input ng-model="new_user.access.st_edit" type="checkbox">Editar Insumo
+                    </label>
+                  </div>
+                </div>
+
+                <div class="col-sm-3">
+                  <div class="checkbox">
+                    <label>
+                      <input ng-model="new_user.access.st_delete" type="checkbox">Eliminar Insumo
+                    </label>
+                  </div>
+
+                  <div class="checkbox">
+                    <label>
+                      <input ng-model="new_user.access.is_add" type="checkbox">Registrar Prestamo
+                    </label>
+                  </div>
+
+                  <div class="checkbox">
+                    <label>
+                      <input ng-model="new_user.access.is_index" type="checkbox">Listar Prestamos
+                    </label>
+                  </div>
+
+                  <div class="checkbox">
+                    <label>
+                      <input ng-model="new_user.access.is_delete" type="checkbox">Devoluciones
+                    </label>
+                  </div>
+                  </div>
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="col-md-12 text-center">
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Crear Usuario</button>
+      </div>
+    </div>
+  </form>
+  </div>
+</div>

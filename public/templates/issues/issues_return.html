@@ -1,0 +1,46 @@
+<!-- Alerts Modal-->
+<div class="modal fade" id="issues-alerts">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Información</h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="alert alert-success" ng-repeat="alert in alerts.success">
+          <strong><i class="fa fa-check"></i></strong> {{alert.message}}
+        </div>
+        <div class="alert alert-danger" ng-repeat="alert in alerts.error">
+          <strong><i class="fa fa-exclamation-triangle"></i></strong> {{alert.message}}
+        </div>
+        <br>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <h3>Devolución de Insumos</h3>
+  <br />
+
+  <div class="row">
+    <div class="col-md-12">
+      <div >
+        <h4>Insumo a devolver:</h4>
+        <autocomplete ng-model="selectedItem" attr-placeholder="Busca por Identificador" data="newItemsInfo" on-select="selectItem" click-activation="true" on-type="searchItem"></autocomplete>
+      </div>
+
+      <div class="alert alert-danger" ng-show="itemError">
+        <strong><i class="fa fa-exclamation-triangle"></i></strong> El insumo se no se encuentra en prestamo!
+      </div>
+      <br><br>
+      <button type="button" ng-disabled="!isReady" ng-click="returnIssue()" class="btn btn-primary" data-dismiss="modal">Registrar Devolución</button>
+    </div>
+  </div>
+</div>
